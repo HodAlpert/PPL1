@@ -2,47 +2,43 @@ import { map } from 'ramda'
 import {filter} from 'ramda'
 import {reduce} from 'ramda'
 import assert = require('assert')
-import { currentId } from 'async_hooks';
 
-
-interface T1{
-    name:string
-}
-interface T2{
+interface v1{//type for q 1.3.1
+    name: string,
     age: number
 }
-type T3=T1|T2
-interface v2{
-    children:T3[]
-}
-interface child{
+
+interface child{//type for q 1.3.2
     children:({name:string}|{age:number})[]
 }
-const t:child={children: [{name: "jhon"},{age:12},{name:"dfasgdfjka"}]}
 
-type f=(x:number)=>number
+type f=(x:number)=>number//type for q 1.3.3
 let y:f=(x)=>x+2//1.3.3
-console.log(y(5))
 
-type v4 = (f:Function, l:any[]) => any[];//1.3.3
+type v4 = (f:Function, l:any[]) => any[];//type for q 1.3.4
 
-console.log(t)
-//-----------------------------------------------------------------------------------------------//
-//-----------------------------------------------------------------------------------------------//
-//-----------------------------------------------------------------------------------------------//
-//-----------------------------------------------------------------------------------------------//
-//-----------------------------------------------------------------------------------------------//
-//-----------------------------------------------------------------------------------------------//
-//-----------------------------------------------------------------------------------------------//
-//-----------------------------------------------------------------------------------------------//
-//2.1
+/**
+ *********************************************************************************************************************
+ *********************************************************************************************************************
+ *                                      PROGRAMMING PART
+ *********************************************************************************************************************
+ *********************************************************************************************************************
+ * */
+
 interface BinTree {
     root: number;
     left?: BinTree;
     right?: BinTree;
 };
-
-const TreePreArray= function(tree: BinTree):number[]{
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q.2.1.1 TreePreArray
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+//TreePreArray type
+type TreePreArrayType=(tree: BinTree)=>number[];
+//TreePreArray definition
+const TreePreArray:TreePreArrayType= (tree)=>{
     if(tree.right===undefined&&tree.left!=undefined){
         return [tree.root].concat(TreePreArray(tree.left))
     }
@@ -53,22 +49,33 @@ const TreePreArray= function(tree: BinTree):number[]{
         return [tree.root]
     }
     else{
-        return [tree.root].concat(TreePreArray(tree.left).concat(TreePreArray(tree.right))) 
+        return [tree.root].concat(TreePreArray(tree.left).concat(TreePreArray(tree.right)))
     }
 };
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q.2.1.2 TreeInArray
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+//TODO code for Q.2.1.2
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q.2.1.3 TreePostArray
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+//TODO code for Q2.1.3
+
 interface GBinTree<T> {
     root: T;
     left?: GBinTree<T>;
     right?: GBinTree<T>;
 };
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q.2.1.4 GBinTreePostArray
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
 
-let bn : GBinTree<string> = {
-    root: "1",
-    left: { root: "2" },
-    right: { root: "3", 
-             right: { root: "4"}
-    }
-}
 const GBinTreePreArray:<T> (tree: GBinTree<T>)=>T[]=(tree)=>{
     if(tree.right===undefined&&tree.left!=undefined){
         return [tree.root].concat(GBinTreePreArray(tree.left))
@@ -80,33 +87,49 @@ const GBinTreePreArray:<T> (tree: GBinTree<T>)=>T[]=(tree)=>{
         return [tree.root]
     }
     else{
-        return [tree.root].concat(GBinTreePreArray(tree.left).concat(GBinTreePreArray(tree.right))) 
+        return [tree.root].concat(GBinTreePreArray(tree.left).concat(GBinTreePreArray(tree.right)))
     }
-}
-console.log(GBinTreePreArray<string>(bn))
+};
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.2.1 KSubsets
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+type KSubsetsType=(elements:any[], k:number)=>any[][]//KSubsets type
+const KSubsets:KSubsetsType = (elements,k)=>{//KSubsets definition
+    return AllSubsets(elements).filter((value: any[])=>value.length===k)
+};
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.2.2 AllSubsets
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+type AllSubsetsType = (elements:any[])=>any[]//AllSubsets type
 const recAllsubsets = function(elements:any[],index:number,accumulator:any[][]):any[][]{
     if (index>=elements.length)
-        return (accumulator)
+        return (accumulator);
     return (recAllsubsets(elements,index+1,accumulator.concat(accumulator.map((x)=>x.concat([elements[index]])))))
-}
-const AllSubsets = function(elements:any[]):any[][]{
+};
+
+const AllSubsets:AllSubsetsType = (elements)=>{//AllSubsets definition
     return recAllsubsets(elements,0,[[]])
-}
-const KSubsets = function(elements: any[],k:number):any[][]{
-    return AllSubsets(elements).filter((value: any[])=>value.length===k)
-}
-const isKlength = function(element: any[],k: number):boolean{
-    return element.length===k
-}
-console.log(KSubsets ([1,2,3,4,5],3) )
+};
+// console.log(KSubsets ([1,2,3,4,5],3) );
 // console.log(AllSubsets([1,2,3,4]))
-
-
-
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.3.1 Flatmap Definition
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
 const Flatmap:<T,R> (f:(x:T)=>R[],A:T[])=>R[]=(f,A)=>{
     return map(f,A).reduce((acc,curr)=>acc.concat(curr))
-}
+};
 
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.3.2 Using Flatmap
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
 // console.log(Flatmap((x)=>x[0], [[[1,2], [3,4]], [[5,6], [7,8]]]) )
 interface boxart{
     width: number, height: number, url:string;
@@ -131,14 +154,12 @@ interface boxartVideo{
     title: string,
     boxart: string,
 }
-
-const getBoxArts:(list: movieList[])=>boxartVideo[]=(list)=>{
+type getBoxArtsType = (list: movieList[])=>boxartVideo[]
+const getBoxArts:getBoxArtsType=(list)=>{
     return Flatmap<movieList,video>((x)=>x.videos,list).map((x)=> 
     <boxartVideo>{id:x.id,title:x.title, boxart:x.boxarts.filter((y:boxart)=>y.height===200&&y.width===150).reduce((acc,curr)=>curr.url,{})})
         
-}
-
-
+};
 let mylist: movieList[] = [
     {
         name: "Instant Queue",
@@ -197,4 +218,47 @@ let mylist: movieList[] = [
         ]
     }
 ]
-console.log(getBoxArts(mylist))
+// console.log(getBoxArts(mylist))
+
+/**
+ *********************************************************************************************************************
+ *********************************************************************************************************************
+ *                                      TESTING PART
+ *********************************************************************************************************************
+ *********************************************************************************************************************
+ * */
+const fullTree:BinTree = {
+    root:1,
+    left:{root:2, left: {root:3},right: {root:5}},
+    right: {root:4, left: {root:6},right:{root:7}}
+};
+const leftBranch:BinTree = {
+    root:1,
+    left:{root:2,
+          left:{root:3,
+                left:{root:4,
+                        left:{root:5}}}}
+};
+const rightBranch:BinTree= {
+    root:1,
+    right:{root:2,
+        right:{root:3,
+            right:{root:4,
+                right:{root:5}}}}
+};
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q.2.1.1 TreePreArray testing
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+assert.ok(JSON.stringify(TreePreArray(fullTree))==JSON.stringify([ 1, 2, 3, 5, 4, 6, 7 ]),"TreePreArray fulltree issue");
+assert.ok(JSON.stringify(TreePreArray(leftBranch))==JSON.stringify([ 1, 2, 3, 4, 5 ]),"TreePreArray leftBranch issue");
+assert.ok(JSON.stringify(TreePreArray(rightBranch))==JSON.stringify([ 1, 2, 3, 4, 5 ]),"TreePreArray leftBranch issue");
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q.2.1.1 TreeInArray testing
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+// assert.ok(JSON.stringify(TreeInArray(fullTree))==JSON.stringify([ 3,2,5,1,6,4,7 ]),"TreeInArray fulltree issue");
+// assert.ok(JSON.stringify(TreeInArray(leftBranch))==JSON.stringify([ 5,4,3,2,1 ]),"TreeInArray leftBranch issue");
+// assert.ok(JSON.stringify(TreeInArray(rightBranch))==JSON.stringify([ 1, 2, 3, 4, 5 ]),"TreeInArray leftBranch issue");
