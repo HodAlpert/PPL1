@@ -92,6 +92,18 @@ const GBinTreePreArray:<T> (tree: GBinTree<T>)=>T[]=(tree)=>{
 };
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.1.5 GBinTreeInArray
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+//TODO implement GBinTreeInArray
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.1.6 GBinTreePostArray
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+//TODO implement GBinTreePostArray
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Q2.2.1 KSubsets
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * */
@@ -160,65 +172,6 @@ const getBoxArts:getBoxArtsType=(list)=>{
     <boxartVideo>{id:x.id,title:x.title, boxart:x.boxarts.filter((y:boxart)=>y.height===200&&y.width===150).reduce((acc,curr)=>curr.url,{})})
         
 };
-let mylist: movieList[] = [
-    {
-        name: "Instant Queue",
-        videos : [
-            {
-                "id": 70111470,
-                "title": "Die Hard",
-                "boxarts": [
-                    { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/DieHard150.jpg" },
-                    { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/DieHard200.jpg" }
-                ],
-                "url": "http://api.netflix.com/catalog/titles/movies/70111470",
-                "rating": 4.0,
-                "bookmark": []
-            },
-            {
-                "id": 654356453,
-                "title": "Bad Boys",
-                "boxarts": [
-                    { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/BadBoys200.jpg" },
-                    { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/BadBoys150.jpg" }
-
-                ],
-                "url": "http://api.netflix.com/catalog/titles/movies/70111470",
-                "rating": 5.0,
-                "bookmark": [{ id: 432534, time: 65876586 }]
-            }
-        ]
-    },
-    {
-        name: "New Releases",
-        videos: [
-            {
-                "id": 65432445,
-                "title": "The Chamber",
-                "boxarts": [
-                    { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/TheChamber150.jpg" },
-                    { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/TheChamber200.jpg" }
-                ],
-                "url": "http://api.netflix.com/catalog/titles/movies/70111470",
-                "rating": 4.0,
-                "bookmark": []
-            },
-            {
-                "id": 675465,
-                "title": "Fracture",
-                "boxarts": [
-                    { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture200.jpg" },
-                    { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture150.jpg" },
-                    { width: 300, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture300.jpg" }
-                ],
-                "url": "http://api.netflix.com/catalog/titles/movies/70111470",
-                "rating": 5.0,
-                "bookmark": [{ id: 432534, time: 65876586 }]
-            }
-        ]
-    }
-]
-// console.log(getBoxArts(mylist))
 
 /**
  *********************************************************************************************************************
@@ -313,3 +266,75 @@ assert.ok(JSON.stringify(GBinTreePreArray<number>(NumberArrayrightBranch))==JSON
 // assert.ok(JSON.stringify(GBinTreePostArray<string>(fullStringTree))==JSON.stringify(['3','5','2','6','7','4','1']),"GBinTreePostArray fullStringTree issue");
 // assert.ok(JSON.stringify(GBinTreePostArray<number[]>(NumberArrayleftBranch))==JSON.stringify([ [5],[4],[3],[2],[1] ]),"GBinTreePostArray NumberArrayleftBranch issue");
 // assert.ok(JSON.stringify(GBinTreePostArray<number>(NumberArrayrightBranch))==JSON.stringify([ 5,4,3,2,1 ]),"GBinTreePostArray NumberArrayrightBranch issue");
+
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.3.1 Flatmap testing
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+//TODO test flatmap
+
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.3.2 Using Flatmap testing
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+//TODO test getBoxArts()
+let mylist: movieList[] = [
+    {
+        name: "Instant Queue",
+        videos : [
+            {
+                "id": 70111470,
+                "title": "Die Hard",
+                "boxarts": [
+                    { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/DieHard150.jpg" },
+                    { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/DieHard200.jpg" }
+                ],
+                "url": "http://api.netflix.com/catalog/titles/movies/70111470",
+                "rating": 4.0,
+                "bookmark": []
+            },
+            {
+                "id": 654356453,
+                "title": "Bad Boys",
+                "boxarts": [
+                    { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/BadBoys200.jpg" },
+                    { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/BadBoys150.jpg" }
+
+                ],
+                "url": "http://api.netflix.com/catalog/titles/movies/70111470",
+                "rating": 5.0,
+                "bookmark": [{ id: 432534, time: 65876586 }]
+            }
+        ]
+    },
+    {
+        name: "New Releases",
+        videos: [
+            {
+                "id": 65432445,
+                "title": "The Chamber",
+                "boxarts": [
+                    { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/TheChamber150.jpg" },
+                    { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/TheChamber200.jpg" }
+                ],
+                "url": "http://api.netflix.com/catalog/titles/movies/70111470",
+                "rating": 4.0,
+                "bookmark": []
+            },
+            {
+                "id": 675465,
+                "title": "Fracture",
+                "boxarts": [
+                    { width: 200, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture200.jpg" },
+                    { width: 150, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture150.jpg" },
+                    { width: 300, height: 200, url: "http://cdn-0.nflximg.com/images/2891/Fracture300.jpg" }
+                ],
+                "url": "http://api.netflix.com/catalog/titles/movies/70111470",
+                "rating": 5.0,
+                "bookmark": [{ id: 432534, time: 65876586 }]
+            }
+        ]
+    }
+]
