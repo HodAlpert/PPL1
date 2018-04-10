@@ -262,5 +262,54 @@ assert.ok(JSON.stringify(TreePreArray(rightBranch))==JSON.stringify([ 1, 2, 3, 4
 // assert.ok(JSON.stringify(TreeInArray(fullTree))==JSON.stringify([ 3,2,5,1,6,4,7 ]),"TreeInArray fulltree issue");
 // assert.ok(JSON.stringify(TreeInArray(leftBranch))==JSON.stringify([ 5,4,3,2,1 ]),"TreeInArray leftBranch issue");
 // assert.ok(JSON.stringify(TreeInArray(rightBranch))==JSON.stringify([ 1, 2, 3, 4, 5 ]),"TreeInArray leftBranch issue");
-
-//test
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q.2.1.1 TreePostArray testing
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+// assert.ok(JSON.stringify(TreePostArray(fullTree))==JSON.stringify([3,5,2,6,7,4,1]),"TreeInArray fulltree issue");
+// assert.ok(JSON.stringify(TreePostArray(leftBranch))==JSON.stringify([ 5,4,3,2,1 ]),"TreeInArray leftBranch issue");
+// assert.ok(JSON.stringify(TreePostArray(rightBranch))==JSON.stringify([ 5,4,3,2,1 ]),"TreeInArray leftBranch issue");
+const fullStringTree:GBinTree<string> = {
+    root:"1",
+    left:{root:"2", left: {root:"3"},right: {root:"5"}},
+    right: {root:"4", left: {root:"6"},right:{root:"7"}}
+};
+const NumberArrayleftBranch:GBinTree<number[]> = {
+    root:[1],
+    left:{root:[2],
+        left:{root:[3],
+            left:{root:[4],
+                left:{root:[5]}}}}
+};
+const NumberArrayrightBranch:GBinTree<number>= {
+    root:1,
+    right:{root:2,
+        right:{root:3,
+            right:{root:4,
+                right:{root:5}}}}
+};
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.1.4 GBinTreePreArray testing
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+assert.ok(JSON.stringify(GBinTreePreArray<string>(fullStringTree))==JSON.stringify([ '1', '2', '3', '5', '4', '6', '7' ]),"GBinTreePreArray fullStringTree issue");
+assert.ok(JSON.stringify(GBinTreePreArray<number[]>(NumberArrayleftBranch))==JSON.stringify([ [1], [2], [3], [4], [5] ]),"GBinTreePreArray NumberArrayleftBranch issue");
+assert.ok(JSON.stringify(GBinTreePreArray<number>(NumberArrayrightBranch))==JSON.stringify([ 1, 2, 3, 4, 5 ]),"GBinTreePreArray NumberArrayrightBranch issue");
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.1.5 GBinTreeInArray testing
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+// assert.ok(JSON.stringify(GBinTreeInArray<string>(fullStringTree))==JSON.stringify([ '3','2','5','1','6','4','7' ]),"GBinTreeInArray fullStringTree issue");
+// assert.ok(JSON.stringify(GBinTreeInArray<number[]>(NumberArrayleftBranch))==JSON.stringify([ [ [5],[4],[3],[2],[1] ] ]),"GBinTreeInArray NumberArrayleftBranch issue");
+// assert.ok(JSON.stringify(GBinTreeInArray<number>(NumberArrayrightBranch))==JSON.stringify([ 1, 2, 3, 4, 5 ]),"GBinTreeInArray NumberArrayrightBranch issue");
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.1.6 GBinTreePostArray testing
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+// assert.ok(JSON.stringify(GBinTreePostArray<string>(fullStringTree))==JSON.stringify(['3','5','2','6','7','4','1']),"GBinTreePostArray fullStringTree issue");
+// assert.ok(JSON.stringify(GBinTreePostArray<number[]>(NumberArrayleftBranch))==JSON.stringify([ [5],[4],[3],[2],[1] ]),"GBinTreePostArray NumberArrayleftBranch issue");
+// assert.ok(JSON.stringify(GBinTreePostArray<number>(NumberArrayrightBranch))==JSON.stringify([ 5,4,3,2,1 ]),"GBinTreePostArray NumberArrayrightBranch issue");
