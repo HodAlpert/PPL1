@@ -262,3 +262,5 @@ assert.ok(JSON.stringify(TreePreArray(rightBranch))==JSON.stringify([ 1, 2, 3, 4
 // assert.ok(JSON.stringify(TreeInArray(fullTree))==JSON.stringify([ 3,2,5,1,6,4,7 ]),"TreeInArray fulltree issue");
 // assert.ok(JSON.stringify(TreeInArray(leftBranch))==JSON.stringify([ 5,4,3,2,1 ]),"TreeInArray leftBranch issue");
 // assert.ok(JSON.stringify(TreeInArray(rightBranch))==JSON.stringify([ 1, 2, 3, 4, 5 ]),"TreeInArray leftBranch issue");
+
+//test
