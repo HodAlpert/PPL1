@@ -19,6 +19,36 @@ var TreePreArray = function (tree) {
         return [tree.root].concat(TreePreArray(tree.left).concat(TreePreArray(tree.right)));
     }
 };
+//TreeInArray definition
+var TreeInArray = function (tree) {
+    if (tree.right === undefined && tree.left != undefined) {
+        return TreeInArray(tree.left).concat(tree.root);
+    }
+    else if (tree.left === undefined && tree.right != undefined) {
+        return [tree.root].concat(TreePreArray(tree.right));
+    }
+    else if (tree.right === undefined && tree.left === undefined) {
+        return [tree.root];
+    }
+    else {
+        return TreeInArray(tree.left).concat(tree.root).concat(TreeInArray(tree.right));
+    }
+};
+//TreePostArray definition
+var TreePostArray = function (tree) {
+    if (tree.right === undefined && tree.left != undefined) {
+        return [tree.root].concat(TreePostArray(tree.left));
+    }
+    else if (tree.left === undefined && tree.right != undefined) {
+        return TreePostArray(tree.right).concat(tree.root);
+    }
+    else if (tree.right === undefined && tree.left === undefined) {
+        return [tree.root];
+    }
+    else {
+        return TreePostArray(tree.right).concat(tree.root).concat(TreePostArray(tree.left));
+    }
+};
 ;
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,6 +67,44 @@ var GBinTreePreArray = function (tree) {
     }
     else {
         return [tree.root].concat(GBinTreePreArray(tree.left).concat(GBinTreePreArray(tree.right)));
+    }
+};
+/**
+ * ~~~~~~~~~~~~~~~~~~~~a~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.1.5 GBinTreeInArray
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+var GBinTreeInArray = function (tree) {
+    if (tree.right === undefined && tree.left != undefined) {
+        return GBinTreeInArray(tree.left).concat(tree.root);
+    }
+    else if (tree.left === undefined && tree.right != undefined) {
+        return [tree.root].concat(GBinTreePreArray(tree.right));
+    }
+    else if (tree.right === undefined && tree.left === undefined) {
+        return [tree.root];
+    }
+    else {
+        return GBinTreePreArray(tree.left).concat(tree.root).concat(GBinTreePreArray(tree.right));
+    }
+};
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Q2.1.6 GBinTreePostArray
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * */
+var GBinTreePostArray = function (tree) {
+    if (tree.right === undefined && tree.left != undefined) {
+        return [tree.root].concat(GBinTreePreArray(tree.left));
+    }
+    else if (tree.left === undefined && tree.right != undefined) {
+        return GBinTreePreArray(tree.right).concat(tree.root);
+    }
+    else if (tree.right === undefined && tree.left === undefined) {
+        return [tree.root];
+    }
+    else {
+        return GBinTreePreArray(tree.right).concat(tree.root).concat(GBinTreePreArray(tree.left));
     }
 };
 var KSubsets = function (elements, k) {
@@ -104,17 +172,17 @@ assert.ok(JSON.stringify(TreePreArray(rightBranch)) == JSON.stringify([1, 2, 3, 
  * Q.2.1.1 TreeInArray testing
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * */
-// assert.ok(JSON.stringify(TreeInArray(fullTree))==JSON.stringify([ 3,2,5,1,6,4,7 ]),"TreeInArray fulltree issue");
-// assert.ok(JSON.stringify(TreeInArray(leftBranch))==JSON.stringify([ 5,4,3,2,1 ]),"TreeInArray leftBranch issue");
-// assert.ok(JSON.stringify(TreeInArray(rightBranch))==JSON.stringify([ 1, 2, 3, 4, 5 ]),"TreeInArray leftBranch issue");
+assert.ok(JSON.stringify(TreeInArray(fullTree)) == JSON.stringify([3, 2, 5, 1, 6, 4, 7]), "TreeInArray fulltree issue");
+assert.ok(JSON.stringify(TreeInArray(leftBranch)) == JSON.stringify([5, 4, 3, 2, 1]), "TreeInArray leftBranch issue");
+assert.ok(JSON.stringify(TreeInArray(rightBranch)) == JSON.stringify([1, 2, 3, 4, 5]), "TreeInArray leftBranch issue");
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Q.2.1.1 TreePostArray testing
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * */
-// assert.ok(JSON.stringify(TreePostArray(fullTree))==JSON.stringify([3,5,2,6,7,4,1]),"TreeInArray fulltree issue");
-// assert.ok(JSON.stringify(TreePostArray(leftBranch))==JSON.stringify([ 5,4,3,2,1 ]),"TreeInArray leftBranch issue");
-// assert.ok(JSON.stringify(TreePostArray(rightBranch))==JSON.stringify([ 5,4,3,2,1 ]),"TreeInArray leftBranch issue");
+assert.ok(JSON.stringify(TreePostArray(fullTree)) == JSON.stringify([3, 5, 2, 6, 7, 4, 1]), "TreePostArray fulltree issue");
+assert.ok(JSON.stringify(TreePostArray(leftBranch)) == JSON.stringify([5, 4, 3, 2, 1]), "TreePostArray leftBranch issue");
+assert.ok(JSON.stringify(TreePostArray(rightBranch)) == JSON.stringify([5, 4, 3, 2, 1]), "TreePostArray leftBranch issue");
 var fullStringTree = {
     root: "1",
     left: { root: "2", left: { root: "3" }, right: { root: "5" } },
@@ -147,17 +215,17 @@ assert.ok(JSON.stringify(GBinTreePreArray(NumberArrayrightBranch)) == JSON.strin
  * Q2.1.5 GBinTreeInArray testing
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * */
-// assert.ok(JSON.stringify(GBinTreeInArray<string>(fullStringTree))==JSON.stringify([ '3','2','5','1','6','4','7' ]),"GBinTreeInArray fullStringTree issue");
-// assert.ok(JSON.stringify(GBinTreeInArray<number[]>(NumberArrayleftBranch))==JSON.stringify([ [ [5],[4],[3],[2],[1] ] ]),"GBinTreeInArray NumberArrayleftBranch issue");
-// assert.ok(JSON.stringify(GBinTreeInArray<number>(NumberArrayrightBranch))==JSON.stringify([ 1, 2, 3, 4, 5 ]),"GBinTreeInArray NumberArrayrightBranch issue");
+assert.ok(JSON.stringify(GBinTreeInArray(fullStringTree)) == JSON.stringify(['3', '2', '5', '1', '6', '4', '7']), "GBinTreeInArray fullStringTree issue");
+assert.ok(JSON.stringify(GBinTreeInArray(NumberArrayleftBranch)) == JSON.stringify([[[5], [4], [3], [2], [1]]]), "GBinTreeInArray NumberArrayleftBranch issue");
+assert.ok(JSON.stringify(GBinTreeInArray(NumberArrayrightBranch)) == JSON.stringify([1, 2, 3, 4, 5]), "GBinTreeInArray NumberArrayrightBranch issue");
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Q2.1.6 GBinTreePostArray testing
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * */
-// assert.ok(JSON.stringify(GBinTreePostArray<string>(fullStringTree))==JSON.stringify(['3','5','2','6','7','4','1']),"GBinTreePostArray fullStringTree issue");
-// assert.ok(JSON.stringify(GBinTreePostArray<number[]>(NumberArrayleftBranch))==JSON.stringify([ [5],[4],[3],[2],[1] ]),"GBinTreePostArray NumberArrayleftBranch issue");
-// assert.ok(JSON.stringify(GBinTreePostArray<number>(NumberArrayrightBranch))==JSON.stringify([ 5,4,3,2,1 ]),"GBinTreePostArray NumberArrayrightBranch issue");
+assert.ok(JSON.stringify(GBinTreePostArray(fullStringTree)) == JSON.stringify(['3', '5', '2', '6', '7', '4', '1']), "GBinTreePostArray fullStringTree issue");
+assert.ok(JSON.stringify(GBinTreePostArray(NumberArrayleftBranch)) == JSON.stringify([[5], [4], [3], [2], [1]]), "GBinTreePostArray NumberArrayleftBranch issue");
+assert.ok(JSON.stringify(GBinTreePostArray(NumberArrayrightBranch)) == JSON.stringify([5, 4, 3, 2, 1]), "GBinTreePostArray NumberArrayrightBranch issue");
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Q2.3.1 Flatmap testing
